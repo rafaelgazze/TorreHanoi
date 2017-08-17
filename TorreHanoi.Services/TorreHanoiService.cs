@@ -8,24 +8,25 @@ using TorreHanoi.Domain.Interface;
 
 namespace TorreHanoi.Services
 {
-    public class TorreHanoi
+    public class TorreHanoiService
     {
         private readonly ILog _log;
         private readonly TorreHanoiDto _torreHanoiDto;
-        private int _numeroMovimentos;
+        public int _numeroMovimentos;
         private Guid _IdMonitorar;
 
-        public TorreHanoi(ILog log, TorreHanoiDto torreHanoiDto)
+        public TorreHanoiService(ILog log)
         {
             _log = log;
-            _torreHanoiDto = torreHanoiDto;
             _numeroMovimentos = 0;
-            _IdMonitorar = Guid.NewGuid();
         }
 
-        public async Task<Guid> Start()
+        public async Task<Guid> Start(TorreHanoiDto torreHanoiDto)
         {
-            MoveTorre(_torreHanoiDto.Discos,'A','B','C');
+            _IdMonitorar = Guid.NewGuid();
+            _numeroMovimentos = 0;
+
+            MoveTorre(torreHanoiDto.Discos,'A','B','C');
 
             return _IdMonitorar;
         }
